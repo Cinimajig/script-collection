@@ -1,4 +1,7 @@
 @ECHO OFF
+
+REM Downloads and installs Python. Modify PYTHON_VERSION and install parameters to fit your needs.
+
 SET PYTHON_VERSION=3.9.6
 
 CD "%~dp0"
