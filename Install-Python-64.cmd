@@ -5,6 +5,12 @@ REM Downloads and installs Python. Modify PYTHON_VERSION, ARCH and install param
 SET PYTHON_VERSION=3.9.6
 SET ARCH=amd64
 
+REM Here is the install parameters. If %ALL_USERS% is set to 1, the script requires admin privileges.
+
+SET ALL_USERS=1
+SET COMPILE_STD_LIB=1
+SET ADD_TO_PATH=1
+
 CD "%~dp0"
 
 IF NOT EXIST python-%PYTHON_VERSION%-amd64.exe (
@@ -15,4 +21,4 @@ IF NOT EXIST python-%PYTHON_VERSION%-amd64.exe (
 )
 
 ECHO Installing Python %PYTHON_VERSION%...
-python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=1 CompileAll=1 PrependPath=1 
+python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
