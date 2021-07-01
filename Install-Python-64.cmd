@@ -13,12 +13,12 @@ SET ADD_TO_PATH=1
 
 CD "%~dp0"
 
-IF NOT EXIST python-%PYTHON_VERSION%-amd64.exe (
+IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
   ECHO Installer not found for version %PYTHON_VERSION%. Donwloading from python.org...
 
-  powershell.exe -NoProfile -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-%ARCH%.exe' -OutFile 'python-%PYTHON_VERSION%-%ARCH%.exe'"
+  powershell.exe -NoProfile -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-%ARCH%.exe' -OutFile '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe'"
   TIMEOUT 1 /NOBREAK
 )
 
 ECHO Installing Python %PYTHON_VERSION%...
-python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
+%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
