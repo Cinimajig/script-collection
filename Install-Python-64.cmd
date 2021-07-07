@@ -5,7 +5,7 @@ REM Downloads and installs Python. Modify PYTHON_VERSION, ARCH and install param
 SET PYTHON_VERSION=3.9.6
 SET ARCH=amd64
 
-REM Here is the install parameters. If %ALL_USERS% is set to 1, the script requires admin privileges.
+REM Here is the install parameters. If %ALL_USERS% is set to 1, the script asks for admin privileges.
 
 SET ALL_USERS=1
 SET COMPILE_STD_LIB=1
