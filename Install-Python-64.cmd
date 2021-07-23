@@ -22,7 +22,7 @@ IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
 
 ECHO Installing Python %PYTHON_VERSION%...
 IF %ALL_USERS% EQU 1 (
-  wscript.exe admin.js %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
+  cscript.exe admin.js %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
 ) ELSE (
   %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
 )
