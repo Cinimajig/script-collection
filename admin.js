@@ -1,3 +1,9 @@
+/*
+    A script that helps with running programs as administrator from the commandline
+    
+    This is suppose to run through wScript.exe or cscript.exe
+*/
+
 var args    = WScript.Arguments;
 var shell   = new ActiveXObject('Shell.Application');
 var cmd     = 'powershell.exe';
