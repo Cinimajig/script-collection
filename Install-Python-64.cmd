@@ -16,7 +16,7 @@ CD "%~dp0"
 IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
   ECHO Installer not found for version %PYTHON_VERSION%. Donwloading from python.org...
 
-  powershell.exe -NoProfile -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-%ARCH%.exe' -OutFile '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe'"
+  powershell.exe -NoProfile -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-%ARCH%.exe' -OutFile '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe'"
   TIMEOUT 1 /NOBREAK
 )
 
