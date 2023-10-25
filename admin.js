@@ -1,7 +1,7 @@
 /*
-    A script that helps with running programs as administrator from the commandline
+    A script that helps with running programs as administrator from the commandline or a shortcut. The elevation will happen through UAC.
     
-    This is suppose to run through wscript.exe or cscript.exe
+    This is suppose to run through wscript.exe or cscript.exe.
 */
 
 var args    = WScript.Arguments;
