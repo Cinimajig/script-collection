@@ -9,8 +9,9 @@ gdi32    = windll.gdi32
 WNDPROCTYPE = WINFUNCTYPE(c_int, HWND, c_uint, WPARAM, LPARAM)
 
 # Custom return codes.
-ERR_CLASS_REGISTRATION = 1
-ERR_WINDOW_CREATION = 2
+ERR_TIMEOUT = 1
+ERR_CLASS_REGISTRATION = 2
+ERR_WINDOW_CREATION = 3
 
 STARTF_USESHOWWINDOW = 0x00000001
 
@@ -157,7 +158,7 @@ def create_window():
     wc.hIcon = IDI_APPLICATION
     wc.hCursor = IDC_ARROW
     wc.hBrush = COLOR_WINDOW + 1
-    wc.lpszClassName = 'KeepRunningPyW'
+    wc.lpszClassName = 'DontSleepPyW'
     wc.hIconSm = IDI_APPLICATION
 
     if user32.RegisterClassExW(byref(wc)) == 0:
@@ -171,7 +172,7 @@ def create_window():
 
     # Creating the Window.
     hwnd = user32.CreateWindowExW(
-        0, wc.lpszClassName, 'Keep Running',
+        0, wc.lpszClassName, "Don't Sleep",
         WS_POPUP | WS_CAPTION | WS_SYSMENU,
         CW_USEDEFAULT, 0,
         320, 120, 0, 0, hinst, 0)
@@ -191,10 +192,11 @@ def create_window():
 
         user32.TranslateMessage(lpmsg)
         user32.DispatchMessageW(lpmsg)
+    
+    user32.UnregisterClassW(wc.lpszClassName, wc.hInstance)
 
     # Returns the last messages wParam (should be zero in normal use).
     return msg.wParam
-
 
 # If running as a script.
 if __name__ == '__main__':
