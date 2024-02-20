@@ -12,7 +12,7 @@ SET COMPILE_STD_LIB=1
 SET ADD_TO_PATH=1
 
 IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
-  ECHO Installer not found for version %PYTHON_VERSION%. Donwloading from python.org...
+  ECHO Installer not found for version %PYTHON_VERSION%. Downloading from python.org...
 
   powershell.exe -NoProfile -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/%PYTHON_VERSION%/python-%PYTHON_VERSION%-%ARCH%.exe' -OutFile '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe'"
   TIMEOUT 1 /NOBREAK
@@ -20,7 +20,7 @@ IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
 
 ECHO Installing Python %PYTHON_VERSION%...
 IF %ALL_USERS% EQU 1 (
-  powershell.exe -Command "Start-Process '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe' -ArgumentList '/passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%'"
+  powershell.exe -Command "Start-Process '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe' -ArgumentList '/passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%' -Verb runas"
 ) ELSE (
   %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
 )
