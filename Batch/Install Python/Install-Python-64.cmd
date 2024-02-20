@@ -11,8 +11,6 @@ SET ALL_USERS=1
 SET COMPILE_STD_LIB=1
 SET ADD_TO_PATH=1
 
-CD "%~dp0"
-
 IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
   ECHO Installer not found for version %PYTHON_VERSION%. Donwloading from python.org...
 
@@ -22,7 +20,7 @@ IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
 
 ECHO Installing Python %PYTHON_VERSION%...
 IF %ALL_USERS% EQU 1 (
-  cscript.exe admin.js %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
+  powershell.exe -Command "Start-Process '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe' -ArgumentList '/passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%'"
 ) ELSE (
   %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
 )
