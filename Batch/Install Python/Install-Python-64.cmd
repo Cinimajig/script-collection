@@ -20,7 +20,7 @@ IF NOT EXIST %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe (
 
 ECHO Installing Python %PYTHON_VERSION%...
 IF %ALL_USERS% EQU 1 (
-  powershell.exe -Command "Start-Process '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe' -ArgumentList '/passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%' -Verb runas"
+  powershell.exe -Command "Start-Process '%TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe' -ArgumentList '/passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%' -Verb runas -Wait"
 ) ELSE (
   %TEMP%\python-%PYTHON_VERSION%-%ARCH%.exe /passive InstallAllUsers=%ALL_USERS% InstallLauncherAllUsers=%ALL_USERS% CompileAll=%COMPILE_STD_LIB% PrependPath=%ADD_TO_PATH%
 )
